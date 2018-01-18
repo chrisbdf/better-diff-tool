@@ -39,9 +39,13 @@ class Scrambler():
     def scramble(self):
         '''Transform text'''
 
+        print(self.master_text)
+
         doc = self.shuffle_paragraphs(self.master_text)
         doc = self.shuffle_sentences(doc)
         doc = self.shuffle_words(doc)
+
+        print('\n\n\n\n' + doc)
 
         with open('2/Principia_Mathematica_Newton_Scrambled', 'w') as o:
             o.write(doc)
@@ -55,38 +59,67 @@ class Scrambler():
 
         # Delete things maybe
         tokenized_document =\
-            [u for u in tokenized_document if not self.roll_a_zero()]
+            [u for u in tokenized_document if not self.roll_a_zero(100)]
 
         shuffle(tokenized_document)
+
         return splitstring.join(tokenized_document)
 
 
-    def shuffle_sentences(self, paragraph):
+    def shuffle_sentences(self, document):
         '''Randomize the ordering of sentences in a paragraph'''
 
-        # We're lucky these documents don't address people by proper titles
-        splitstring = '.'
-        tokenized_paragraph = paragraph.split(splitstring)
+        # Tokenize into paragraphs
+        paragraph_splitstring = '\n\n'
+        paragraphs = document.split(paragraph_splitstring)
 
-        # Delete things maybe
-        tokenized_paragraph =\
-            [u for u in tokenized_paragraph if not self.roll_a_zero()]
+        # For each paragraph
+        sentence_splitstring = '.'
+        for i in range(len(paragraphs)):
+            # Randomly choose paragraphs to be shuffled
+            if self.roll_a_zero(2):
+                tokenized_paragraph = paragraphs[i].split(sentence_splitstring)
 
-        shuffle(tokenized_paragraph)
-        return splitstring.join(tokenized_paragraph)
+                # Delete things maybe
+                tokenized_paragraph =\
+                    [u for u in tokenized_paragraph if not self.roll_a_zero(5)]
+
+                shuffle(tokenized_paragraph)
+
+                paragraphs[i] = sentence_splitstring.join(tokenized_paragraph)
+
+        # Recombine
+        return paragraph_splitstring.join(paragraphs)
 
 
-    def shuffle_words(self, sentence):
+    def shuffle_words(self, document):
         '''Randomize the ordering of words in a sentence'''
 
-        splitstring = ' '
-        tokenized_sentence = sentence.split(splitstring)
+        # Tokenize document into sentences
+        sentence_splitstring = '.'
+        sentences = document.split(sentence_splitstring)
 
-        # Delete things maybe
-        tokenized_sentence =\
-            [u for u in tokenized_sentence if not self.roll_a_zero()]
+        # Randomly select some sentences to scramble
+        word_splitstring = ' '
+        for i in range(len(sentences)):
+            if self.roll_a_zero(8):
+                tokenized_sentence = sentences[i].split(word_splitstring)
 
-        shuffle(tokenized_sentence)
+                # Delete things maybe
+                tokenized_sentence =\
+                    [u for u in tokenized_sentence if not self.roll_a_zero(10)]
+
+                shuffle(tokenized_sentence)
+
+                sentences[i] = word_splitstring.join(tokenized_sentence)
+
+        doc = sentence_splitstring.join(sentences)
+
+        return doc
+
+
+    def shuffle_letters(self, word):
+        '''Randomize the ordering of letters in a word'''
 
         # Misspell letters maybe
         if self.roll_a_zero():
@@ -99,17 +132,6 @@ class Scrambler():
             # Replace original
             t = tokenized_sentence # Semantic sugar
             t[t.index(original_word)] = shuffled_word
-
-        sentence = splitstring.join(tokenized_sentence)
-
-        # Add words maybe
-        possibly_edited_sentence = self.insert_word_maybe(sentence)
-
-        return possibly_edited_sentence
-
-
-    def shuffle_letters(self, word):
-        '''Randomize the ordering of letters in a word'''
 
         # Tokenize and delete maybe
         tokenized_string = [u for u in word]
@@ -135,10 +157,10 @@ class Scrambler():
         return ' '.join(tokens)
 
 
-    def roll_a_zero(self):
+    def roll_a_zero(self, n_sides):
         '''Roll a 100-sided die. If it comes up on 0, return True.'''
 
-        sides = [u for u in range(100)]
+        sides = [u for u in range(n_sides)]
         roll = choice(sides)
         if roll == 0:
             return True
