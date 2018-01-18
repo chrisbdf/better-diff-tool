@@ -118,27 +118,6 @@ class Scrambler():
         return doc
 
 
-    def shuffle_letters(self, word):
-        '''Randomize the ordering of letters in a word'''
-
-        # Misspell letters maybe
-        if self.roll_a_zero():
-            # Select a word
-            original_word = choice(tokenized_sentence)
-
-            # Scramble it
-            shuffled_word = self.shuffle_letters(original_word)
-
-            # Replace original
-            t = tokenized_sentence # Semantic sugar
-            t[t.index(original_word)] = shuffled_word
-
-        # Tokenize and delete maybe
-        tokenized_string = [u for u in word]
-        shuffle(tokenized_string)
-        return ''.join(tokenized_string)
-
-
     def insert_word_maybe(self, sentence):
         '''Roll a 10-sided die. If it comes up 0, insert a word randomly
            somewhere.
