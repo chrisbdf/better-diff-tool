@@ -26,17 +26,24 @@ Thus, it should be able to detect transformations, i.e., insertion, deletion, su
 
 There are three types of transformations: 
 
-1. Deletion:
-the quick brown fox the brown fox
-
-2. Addition:
-the brown fox
-the quick brown fox
-
-3. Transposition:
-the quick brown fox the brown quick fox
+1. **Deletion**:
+```
+    Before:    the quick brown fox
+    After:     the brown fox
+```
+2. **Addition**:
+```
+    Before:    the brown fox
+    After:     the quick brown fox
+```
+3. **Transposition**:
+```
+    Before:    the quick brown fox 
+    After:     the brown quick fox
+```
 
 There are two components to this project:
+
 Program 1, Diff Tool: Find the minimum sequence of transformations
 
 The diff tool will take two command line arguments, which are the names of two documents. The program will print to a file or the standard output the minimum sequence of transformations that turn one document into the other. You can use any programming language (Python preferred).
