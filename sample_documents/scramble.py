@@ -32,7 +32,7 @@ class Scrambler():
     def read(self):
         '''Read the document into a string and return the string.'''
 
-        with open('2/Principia_Mathematica_Newton_Original', 'r') as i:
+        with open('3/hhgg_Original.txt', 'r') as i:
             return i.read()
 
 
@@ -47,7 +47,7 @@ class Scrambler():
 
         print('\n\n\n\n' + doc)
 
-        with open('2/Principia_Mathematica_Newton_Scrambled', 'w') as o:
+        with open('3/hhgg_Scrambled.txt', 'w') as o:
             o.write(doc)
 
 
