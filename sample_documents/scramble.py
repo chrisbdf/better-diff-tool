@@ -15,18 +15,6 @@ class Scrambler():
 
     def __init__(self):
         self.master_text = self.read()
-        self.insert_from = ("That night, as the Heart of Gold was busy "
-            " putting  a  few  light years  between  itself  and  the "
-            "Horsehead Nebula, Zaphod lounged under the small palm tree on "
-            "the bridge trying to bang his  brain into  shape  with  massive"
-            " Pan Galactic Gargle Blasters; Ford and Trillian sat in a "
-            "corner discussing life and matters arising from it; and Arthur"
-            " took to his bed to flip through Ford's copy of The Hitch "
-            "Hiker's Guide to the Galaxy. Since he was going to live  in"
-            " the  place,  he reasoned, he'd better start finding out "
-            "something about it.")
-        self.insert_from = ' '.join([u for u in self.insert_from.split(' ')
-                                     if u.isalpha()])
 
 
     def read(self):
@@ -116,24 +104,6 @@ class Scrambler():
         doc = sentence_splitstring.join(sentences)
 
         return doc
-
-
-    def insert_word_maybe(self, sentence):
-        '''Roll a 10-sided die. If it comes up 0, insert a word randomly
-           somewhere.
-        '''
-
-        sides = [u for u in range(10)]
-        roll = choice(sides)
-        if roll != 0:
-            return sentence
-
-        word_to_insert = choice(insert_from.split(' '))
-
-        tokens = sentence.split(' ')
-        tokens.insert(choice([u for u in range(len(tokens))]), word_to_insert)
-
-        return ' '.join(tokens)
 
 
     def roll_a_zero(self, n_sides):
