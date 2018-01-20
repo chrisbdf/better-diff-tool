@@ -42,6 +42,10 @@ There are three types of transformations:
     After:     the brown quick fox
 ```
 
+NOTE: transformations can apply to both **words** and **sentences**.
+So you can transpose a sentence or a word.
+You can also add a sentence or a word.
+
 There are two components to this project:
 
 Program 1, Diff Tool: Find the minimum sequence of transformations
