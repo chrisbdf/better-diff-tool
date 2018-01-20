@@ -19,8 +19,8 @@ Draft 2:
 ```
 
 MINIMUM TRANSFORMATION SEQUENCE: 
-1. Replace word "dog" with word "frog" 
-2. Transpose sentence 1, sentence 2
+1. Transpose sentence 1 ("An exciting day dawned") from "Draft 1" to become 3rd sentence in "Draft 2".
+1. Change word "dog" to "frog"
 
 Thus, it should be able to detect transformations, i.e., insertion, deletion, substitution, of blocks of text (eg. paragraphs, sentences, words). Note that transformations may be nested: for example, a paragraph at the beginning of the first draft of a document may have been moved to the end of the document in the second draft, and in addition, the paragraph may have had edits made within it in the second draft.
 
