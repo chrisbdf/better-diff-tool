@@ -1,5 +1,7 @@
 # better-diff-tool
 
+UPDATE: If you completed the code challenge, please email chris@bigdatafed.com with a link/attachment to your source code.
+
 Create a better diff tool: this tool will compare two text documents and identify the minimum sequence of transformations which can be applied to the first document in order to re-create the second document.
 
 Example: 
